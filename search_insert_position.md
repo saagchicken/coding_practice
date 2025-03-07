@@ -36,6 +36,31 @@ class Solution:
 ```
 
 ## Step2
+-最初のrecursionを使ったやり方だと空間計算量が悪いことに気づいたので、
+-while文を使って書いてみました
+
+```python
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        left_index=0
+        right_index=len(nums)-1
+        while True:
+            if target<=nums[left_index]:
+                return left_index
+            if target==nums[right_index]:
+                return right_index
+            if target>nums[right_index]:
+                return right_index+1
+            mid=(left_index+right_index)//2
+            if mid==left_index:
+                return right_index
+            if target==nums[mid]:
+                return mid
+            if target>nums[mid]:
+                left_index=mid
+            else:
+                right_index=mid
+```
 
 
 
