@@ -85,3 +85,4 @@ class Solution:
                 right_index=mid-1
         return left_index
 ```
+
