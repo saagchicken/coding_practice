@@ -23,3 +23,4 @@ class Solution:
                 return binarySearch(left, mid)
 
         return binarySearch(0, len(nums) - 1)
+```
