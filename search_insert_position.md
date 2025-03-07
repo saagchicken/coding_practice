@@ -1,3 +1,13 @@
+# 35. Search Insert Position
+
+## Step1
+
+-Given a sorted array of distinct integers and a target value, 
+-return the index if the target is found. 
+-If not, return the index where it would be if it were inserted in order.
+-You must write an algorithm with O(log n) runtime complexity.
+
+
 ```python
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
@@ -24,3 +34,10 @@ class Solution:
 
         return binarySearch(0, len(nums) - 1)
 ```
+
+## Step2
+
+
+
+
+## Step3
