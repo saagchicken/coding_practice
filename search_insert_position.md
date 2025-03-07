@@ -66,3 +66,22 @@ class Solution:
 
 
 ## Step3
+
+-LeetCodeの答えとしても、CharGPTに聞いた答えとしても、以下のようなコードが返ってきたので、これを三回写経しました
+
+```python
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        left_index=0
+        right_index=len(nums)-1
+
+        while left_index<=right_index:
+            mid=(left_index+right_index)//2
+            if nums[mid]==target:
+                return mid
+            elif nums[mid]<target:
+                left_index=mid+1
+            else:
+                right_index=mid-1
+        return left_index
+```
