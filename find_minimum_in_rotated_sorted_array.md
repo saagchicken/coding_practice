@@ -57,3 +57,25 @@ class Solution:
         return nums[left_index]
 
 ```
+
+# Step 3
+
+とりあえず、以下のコードに関してはほぼ同じものがスラスラかけるようになった
+
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left_index = 0
+        right_index = len(nums) - 1
+        while nums[left_index] > nums[right_index]:
+            mid = (left_index + right_index) // 2
+            if nums[mid] < nums[left_index]:
+                right_index = mid
+            elif nums[mid] > nums[left_index]:
+                left_index = mid + 1
+            else:
+                return nums[right_index]
+        return nums[left_index]
+
+
+```
