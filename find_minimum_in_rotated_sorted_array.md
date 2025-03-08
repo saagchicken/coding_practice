@@ -31,3 +31,29 @@ class Solution:
         return nums[left_index]
 
 ```
+
+# Step 2
+
+35. Search Insert Positionを解いたときにmidに+1したり-1したりする理由がよくわかっていなかったので、
+開区間とか閉区間のことを考えつつコードを書いてみた
+nums[mid]>nums[left_index]の場合にleft_index=mid+1としたのは、
+その場合nums[mid]が求める最小値になることはないので、
+考える区間の左端をmid+1に設定してよいから
+
+```python
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left_index=0
+        right_index=len(nums)-1
+        while nums[left_index]>nums[right_index]:
+            mid=(left_index+right_index)//2
+            if nums[mid]<nums[left_index]:
+                right_index=mid
+            elif nums[mid]>nums[left_index]:
+                left_index=mid+1
+            else:
+                return nums[right_index]
+        return nums[left_index]
+
+```
