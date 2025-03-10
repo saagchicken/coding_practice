@@ -87,3 +87,32 @@ class Solution:
         return left_index
 ```
 
+# 復習
+
+二分探索の問題を全部解いた後に、復習のためにもう一度解いています。
+
+やり方としては、基本的に閉区間で書くのが好きなので今回もそうしていますが、
+
+個人的には、35の答えは[0, len(nums)]の範囲にあるので、例外処理をするのでなければ、
+
+「閉区間で解くつもりでleft=0, right=len(nums)とする」
+
+のが専門用語の使い方として正しい気がする
+
+という思想のもと、そういう初期値でやっています。
+
+```python
+
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        left = 0
+        right = len(nums)
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] >= target:
+                right = mid
+            else:
+                left = mid + 1
+        return left
+
+```
