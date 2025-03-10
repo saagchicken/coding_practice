@@ -1,3 +1,4 @@
+
 # 35. Search Insert Position
 
 ## Step1
@@ -85,3 +86,4 @@ class Solution:
                 right_index=mid-1
         return left_index
 ```
+
