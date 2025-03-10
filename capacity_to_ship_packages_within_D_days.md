@@ -90,3 +90,43 @@ class Solution:
 
 ```
 
+# 復習
+
+1011 Capacity to Ship Packages Within D Daysの復習です。
+
+閉区間が好きなので閉区間で解いています。
+
+学んだこととしては、pythonのnaming conventionなどについてです。
+
+加えて、can_ship_with_capacity(capacity)のなかで、weight>capacityの場合にfalseを返すよう二行加えてあります。
+
+必要ないことはわかってるんですが、念のため。
+
+```python
+
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        def can_ship_with_capacity(capacity):
+            remaining_capacity = 0
+            required_days = 0
+            for weight in weights:
+                if weight > capacity:
+                    return False
+                elif weight > remaining_capacity:
+                    required_days += 1
+                    remaining_capacity = capacity - weight
+                else:
+                    remaining_capacity -= weight
+            return required_days <= days
+
+        min_capacity = max(weights)
+        max_capacity = sum(weights)
+        while min_capacity < max_capacity:
+            mid_capacity = (min_capacity + max_capacity) // 2
+            if can_ship_with_capacity(mid_capacity):
+                max_capacity = mid_capacity
+            else:
+                min_capacity = mid_capacity + 1
+        return min_capacity
+
+```
