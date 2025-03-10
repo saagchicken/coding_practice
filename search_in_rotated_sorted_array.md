@@ -153,3 +153,40 @@ class Solution:
 
 
 ```
+
+# 復習
+
+33. Search in Rotated Sorted Arrayの復習です。
+
+閉区間が好きなので今回も閉区間で解いています。
+
+学んだこととしては、pythonにおける関数命名のマナーや、論理記号などについてです。
+
+```python
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        def target_can_be_in_this_interval(left_closed_end, right_closed_end):
+            if nums[left_closed_end] <= nums[right_closed_end]:
+                return (
+                    nums[left_closed_end] <= target and target <= nums[right_closed_end]
+                )
+            else:
+                return (
+                    nums[left_closed_end] <= target or target <= nums[right_closed_end]
+                )
+
+        left = 0
+        right = len(nums) - 1
+        while left < right:
+            mid = (left + right) // 2
+            if target_can_be_in_this_interval(left, mid):
+                right = mid
+            else:
+                left = mid + 1
+        if nums[left] == target:
+            return left
+        else:
+            return -1
+
+```
