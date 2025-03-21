@@ -72,6 +72,77 @@ https://github.com/rossy0213/leetcode/pull/19/files
 
 コンビネーションを使うやり方や、一次元dpで空間計算量をO(mn)からO(m+n)に減らす方法などがあるが、個人的にはこのやり方が教育上良いと思った。
 
+二重forループの中でif分岐をするより外側で片方のindexが0の場合に1を埋めてしまったほうがいいと思ったので、そこだけ変更。
+
+```python
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp_paths = [[0] * n for _ in range(m)]
+        for i in range(m):
+            dp_paths[i][0] = 1
+        for j in range(n):
+            dp_paths[0][j] = 1
+        for i in range(1, m):
+            for j in range(1, n):
+                dp_paths[i][j] = dp_paths[i - 1][j] + dp_paths[i][j - 1]
+        return dp_paths[-1][-1]
+
+```
+
+# Step3
+
+動的計画法も慣れていない気がするので、素直に三回写経します
+
+空間計算量をO(m+n)に抑えられるという指摘は当然あると思うのですが、条件が1 <= m, n <= 100なので二次元メモを持つ方法も悪くないかなと思っています。
+
+やってみて思うのですが、この問題、二次元メモを使うという条件の下では、ほとんどほかの自然な書き方が無いですね（少なくともそのように感じるようになりました）。
+
+最初のコードを見ると、どうしてこんなに酷いものが生成されたのか不思議です。
 
 
+```python
 
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        num_paths = [[0] * n for _ in range(m)]
+        for i in range(m):
+            num_paths[i][0] = 1
+        for j in range(n):
+            num_paths[0][j] = 1
+        for i in range(1, m):
+            for j in range(1, n):
+                num_paths[i][j] = num_paths[i - 1][j] + num_paths[i][j - 1]
+        return num_paths[-1][-1]
+
+```
+
+```python
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        num_paths = [[0] * n for _ in range(m)]
+        for i in range(m):
+            num_paths[i][0] = 1
+        for j in range(n):
+            num_paths[0][j] = 1
+        for i in range(1, m):
+            for j in range(1, n):
+                num_paths[i][j] = num_paths[i - 1][j] + num_paths[i][j - 1]
+        return num_paths[-1][-1]
+
+```
+
+改善の余地なしだと思ってぼーっと写経していたら、メモの初期値は1でいいことに気づきました。
+
+```python
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        dp_paths = [[1] * n for _ in range(m)]
+        for i in range(1, m):
+            for j in range(1, n):
+                dp_paths[i][j] = dp_paths[i][j - 1] + dp_paths[i - 1][j]
+        return dp_paths[-1][-1]
+
+```
